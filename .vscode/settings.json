@@ -1,0 +1,32 @@
+{
+    "cSpell.words": [
+        "figi",
+        "IRMQ",
+        "makshuk",
+        "Maksim",
+        "marketdata",
+        "Parens",
+        "rabbitmq",
+        "Shuklin",
+        "tinkoff",
+        "UTSTOM",
+        "резолва"
+    ],
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/Thumbs.db": true,
+        "dist": true,
+        "node_modules": true,
+        ".vscode": true
+    },
+    "hide-files.files": [
+        "dist",
+        "node_modules",
+        ".vscode"
+    ],
+    "files.autoSave": "afterDelay"
+}

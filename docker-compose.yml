@@ -1,0 +1,21 @@
+version: '3.8'
+services: starter-template
+  app:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: github-ai
+    networks:
+      - message_broker_network
+    environment:
+      - NODE_ENV=production
+      - TZ=Europe/Moscow
+    volumes:
+      - ./envs:/app/envs
+    restart: unless-stopped
+
+
+networks:
+  message_broker_network:
+    name: rabbitmq_network
+    driver: bridge
