@@ -1,5 +1,5 @@
 version: '3.8'
-services: starter-template
+services:
   app:
     build: 
       context: .
@@ -13,7 +13,6 @@ services: starter-template
     volumes:
       - ./envs:/app/envs
     restart: unless-stopped
-
 
 networks:
   message_broker_network:
