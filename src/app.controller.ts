@@ -1,20 +1,24 @@
-import { Controller, } from '@nestjs/common';
+import { Controller } from '@nestjs/common';
 import { AppService } from './app.service';
 import { RMQRoute } from 'nestjs-rmq';
-import { AGSendQuestionAI } from 'contracts/azure-github.contract';
+import { AGSendQuestionAI } from './contracts/azure-github.contract';
 
 @Controller()
 export class AppController {
-    constructor(private readonly appService: AppService,) { }
-
+    constructor(private readonly appService: AppService) { }
 
     @RMQRoute(AGSendQuestionAI.topic)
-    async getHello(data: AGSendQuestionAI.Request) {
+    async processAIQuestion(data: AGSendQuestionAI.Request): Promise<AGSendQuestionAI.Response> {
+        console.log({ data });
         console.log(`${AGSendQuestionAI.topic}`, data.userMessage);
         try {
-            return await this.appService.run(data.userMessage);
+            const botMessage = await this.appService.run(data.userMessage, {
+                model: data.model,
+                response_format: data.response_format
+            });
+            return { botMessage };
         } catch (error) {
-            console.error('[getHello] Error processing request:', error);
+            console.error('[processAIQuestion] Error processing request:', error);
             throw error;
         }
     }

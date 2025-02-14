@@ -20,4 +20,8 @@ export interface AzureApiError {
   message: string;
   code: string;
 }
-  
+
+export interface ChatCompletionConfig {
+  model?: string;
+  response_format?: ChatCompletionsResponseFormat;
+}

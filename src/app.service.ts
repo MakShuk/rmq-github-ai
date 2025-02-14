@@ -1,8 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { AzureKeyCredential } from "@azure/core-auth";
-import ModelClient from '@azure-rest/ai-inference';
-import { AzureApiError, ChatCompletionResponse, ChatCompletionsResponseFormat } from './app.interface';
-
+import ModelClient, { ChatCompletionsResponseFormat } from '@azure-rest/ai-inference';
+import { AzureApiError, ChatCompletionResponse, ChatCompletionConfig } from './app.interface';
 
 /**
  * Сервис для работы с Azure AI Inference API
@@ -13,7 +12,6 @@ export class AppService {
   private readonly apiEndpoint: string = "https://models.inference.ai.azure.com";
   private readonly modelConfiguration = {
     name: "gpt-4o-mini",
-    maxTokens: 1000,
     response_format: { type: "json_object" } as ChatCompletionsResponseFormat
   };
 
@@ -42,9 +40,10 @@ export class AppService {
   /**
    * Отправка запроса к API и получение ответа
    * @param userMessage - Сообщение пользователя
+   * @param config - Конфигурация запроса (опционально)
    * @throws {Error} При ошибке запроса или неверном ответе
    */
-  async run(userMessage: string): Promise<string> {
+  async run(userMessage: string, config?: ChatCompletionConfig): Promise<string> {
     try {
       const client = this.initializeAzureClient();
       const response = await client.path("/chat/completions").post({
@@ -52,9 +51,8 @@ export class AppService {
           messages: [
             { role: "user", content: userMessage }
           ],
-          max_tokens: this.modelConfiguration.maxTokens,
-          model: this.modelConfiguration.name,
-          response_format: this.modelConfiguration.response_format || undefined
+          model: config?.model || this.modelConfiguration.name,
+          response_format: config?.response_format || this.modelConfiguration.response_format
         }
       });
 
