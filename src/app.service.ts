@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { AzureKeyCredential } from "@azure/core-auth";
 import ModelClient from '@azure-rest/ai-inference';
-import { AzureApiError, ChatCompletionResponse } from 'app.interface';
+import { AzureApiError, ChatCompletionResponse, ChatCompletionsResponseFormat } from './app.interface';
 
 
 /**
@@ -14,7 +14,7 @@ export class AppService {
   private readonly modelConfiguration = {
     name: "gpt-4o-mini",
     maxTokens: 1000,
-    response_format: "json"
+    response_format: { type: "json_object" } as ChatCompletionsResponseFormat
   };
 
   constructor() {
