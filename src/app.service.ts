@@ -3,6 +3,7 @@ import { AzureKeyCredential } from "@azure/core-auth";
 import ModelClient from '@azure-rest/ai-inference';
 import { AzureApiError, ChatCompletionResponse } from 'app.interface';
 
+
 /**
  * Сервис для работы с Azure AI Inference API
  */
@@ -12,7 +13,8 @@ export class AppService {
   private readonly apiEndpoint: string = "https://models.inference.ai.azure.com";
   private readonly modelConfiguration = {
     name: "gpt-4o-mini",
-    maxTokens: 1000
+    maxTokens: 1000,
+    response_format: "json"
   };
 
   constructor() {
@@ -51,10 +53,9 @@ export class AppService {
             { role: "user", content: userMessage }
           ],
           max_tokens: this.modelConfiguration.maxTokens,
-          model: this.modelConfiguration.name
+          model: this.modelConfiguration.name,
+          response_format: this.modelConfiguration.response_format || undefined
         }
-
-        
       });
 
       if (response.status !== "200") {
