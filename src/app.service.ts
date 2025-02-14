@@ -53,6 +53,8 @@ export class AppService {
           max_tokens: this.modelConfiguration.maxTokens,
           model: this.modelConfiguration.name
         }
+
+        
       });
 
       if (response.status !== "200") {
