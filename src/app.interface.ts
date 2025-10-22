@@ -1,6 +1,4 @@
-export interface ChatCompletionsResponseFormat {
-  type: "text" | "json_object";
-}
+import { ChatCompletionsResponseFormat } from '@azure-rest/ai-inference';
 
 export interface ChatCompletionChoice {
   message: {

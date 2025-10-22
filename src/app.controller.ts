@@ -9,9 +9,9 @@ export class AppController {
 
     @RMQRoute(AGSendQuestionAI.topic)
     async processAIQuestion(data: AGSendQuestionAI.Request): Promise<AGSendQuestionAI.Response> {
-        console.log({ data });
-        console.log(`${AGSendQuestionAI.topic}`, data.userMessage);
         try {
+            console.log({ data });
+            
             const botMessage = await this.appService.run(data.userMessage, {
                 model: data.model,
                 response_format: data.response_format

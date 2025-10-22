@@ -1,5 +1,6 @@
+import { ChatCompletionsResponseFormat } from '@azure-rest/ai-inference';
 import { IsString, IsOptional, IsObject } from 'class-validator';
-import { ChatCompletionsResponseFormat } from '../app.interface';
+
 
 export namespace AGSendQuestionAI {
     export const topic = "github-ai.send-question.queue";

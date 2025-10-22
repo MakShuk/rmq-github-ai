@@ -33,6 +33,5 @@ COPY --from=builder /app/dist ./dist
 # Копируем env файлы
 COPY envs/.env.* ./envs/
 
-
 # Запускаем приложение
 CMD ["npm", "run", "start:prod"] 

@@ -12,7 +12,7 @@ export class AppService {
   private readonly apiEndpoint: string = "https://models.inference.ai.azure.com";
   private readonly modelConfiguration = {
     name: "gpt-4o-mini",
-    response_format: { type: "json_object" } as ChatCompletionsResponseFormat
+    response_format: { type: "text" } as ChatCompletionsResponseFormat
   };
 
   constructor() {
